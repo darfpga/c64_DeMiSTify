@@ -27,8 +27,8 @@ here, the number of units defaults to 4. */
 #undef CONFIG_DISKIMG_UNITS 2
 
 /* IDE emulation */
-#define CONFIG_IDE
-#define CONFIG_IDE_UNITS 2
+#undef CONFIG_IDE
+#undef CONFIG_IDE_UNITS 2
 
 /* Speed up file operations by "bookmarking" the file.
    (Undef to disable, or set to the number of desired bookmarks - a reasonable
@@ -68,11 +68,11 @@ here, the number of units defaults to 4. */
 #undef CONFIG_AUTOCLOSE_OSD
 
 /* Is this an arcade core with .ARC file support? */
-#define CONFIG_ARCFILE
+#undef CONFIG_ARCFILE
 
 /* If this is defined, DeMiSTify will look for a file called "15KHZ.CFG", and if found,
 disable the scandoubler. */
-#define CONFIG_AUTOSCANDOUBLER
+#undef CONFIG_AUTOSCANDOUBLER
 
 #endif
 
