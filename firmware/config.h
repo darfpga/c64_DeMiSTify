@@ -23,8 +23,8 @@
 /* Disk Image support - used for Save RAM on consoles as well as the
 more obvious application of disk images on computer cores.  If not defined
 here, the number of units defaults to 4. */
-#undef CONFIG_DISKIMG
-#undef CONFIG_DISKIMG_UNITS 2
+#define CONFIG_DISKIMG
+#define CONFIG_DISKIMG_UNITS 2
 
 /* IDE emulation */
 #undef CONFIG_IDE
@@ -62,7 +62,7 @@ here, the number of units defaults to 4. */
 #undef CONFIG_RTC
 
 /* Support for 64-bit status word.  Adds around 200 bytes to the firmware size. */
-#undef CONFIG_STATUSWORD_64BIT
+#define CONFIG_STATUSWORD_64BIT
 
 /* Automatically close OSD on toggle menu items (generally reset) */
 #undef CONFIG_AUTOCLOSE_OSD
