@@ -186,10 +186,10 @@ VGA_VS<=vga_vsync;
 
 -- Generate clocks
 
-guest: COMPONENT guest_top
+guest: entity work.c64_mist
 	PORT map
 	(
-		CLOCK_27 => MAX10_CLK1_50&MAX10_CLK1_50, -- Comment out one of these lines to match the guest core.
+--		CLOCK_27 => MAX10_CLK1_50&MAX10_CLK1_50, -- Comment out one of these lines to match the guest core.
 		CLOCK_27 => MAX10_CLK1_50,
 --		RESET_N => reset_n,
 		-- clocks
@@ -221,10 +221,13 @@ guest: COMPONENT guest_top
 		VGA_B => vga_blue(7 downto 2),
 		AUDIO_L => sigma_l,
 		AUDIO_R => sigma_r,
-		PS2K_CLK => ps2_keyboard_clk_in or intercept, -- Block keyboard when OSD is active
-		PS2K_DAT => ps2_keyboard_dat_in,
-		PS2M_CLK => ps2_mouse_clk_in,
-		PS2M_DAT => ps2_mouse_dat_in
+		
+		UART_RX => '0',
+		UART_TX => open
+--		PS2K_CLK => ps2_keyboard_clk_in or intercept, -- Block keyboard when OSD is active
+--		PS2K_DAT => ps2_keyboard_dat_in,
+--		PS2M_CLK => ps2_mouse_clk_in,
+--		PS2M_DAT => ps2_mouse_dat_in
 );
 
 -- Pass internal signals to external SPI interface
@@ -235,7 +238,7 @@ spi_fromguest <= spi_do;
 controller : entity work.substitute_mcu
 	generic map (
 		sysclk_frequency => 500,
-		debug => false,
+		debug     => false,
 		jtag_uart => false
 	)
 	port map (
