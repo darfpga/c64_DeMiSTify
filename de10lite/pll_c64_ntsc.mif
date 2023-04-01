@@ -1,24 +1,25 @@
--- Copyright (C) 1991-2014 Altera Corporation
--- Your use of Altera Corporation's design tools, logic functions 
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions 
 -- and other software and tools, and its AMPP partner logic 
 -- functions, and any output files from any of the foregoing 
 -- (including device programming or simulation files), and any 
 -- associated documentation or information are expressly subject 
--- to the terms and conditions of the Altera Program License 
--- Subscription Agreement, Altera MegaCore Function License 
--- Agreement, or other applicable license agreement, including, 
--- without limitation, that your use is for the sole purpose of 
--- programming logic devices manufactured by Altera and sold by 
--- Altera or its authorized distributors.  Please refer to the 
--- applicable agreement for further details.
+-- to the terms and conditions of the Intel Program License 
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel MegaCore Function License Agreement, or other 
+-- applicable license agreement, including, without limitation, 
+-- that your use is for the sole purpose of programming logic 
+-- devices manufactured by Intel and sold by Intel or its 
+-- authorized distributors.  Please refer to the applicable 
+-- agreement for further details.
 
 -- MIF file representing initial state of PLL Scan Chain
---    Device Family: Cyclone III
+--    Device Family: MAX 10
 --    Device Part: -
---    Device Speed Grade: 8
+--    Device Speed Grade: -
 --    PLL Scan Chain: Fast PLL (144 bits)
---    File Name: /home/gyurco/git/mist-board/cores/c64/rtl/mist/pll_c64_ntsc.mif
---    Generated: Mon Mar 18 13:52:51 2019
+--    File Name: C:/Users/marga/Documents/GitHub/darfpga/c64_DeMiSTify/de10lite//pll_c64_ntsc_.mif
+--    Generated: Fri Mar 31 18:17:41 2023
 
 WIDTH=1;
 DEPTH=144;
@@ -31,11 +32,11 @@ CONTENT BEGIN
 	1    :   0; -- Reserved Bits = 0 (1 bit(s))
 	2    :   0; -- Loop Filter Capacitance = 0 (2 bit(s)) (Setting 0)
 	3    :   0;
-	4    :   0; -- Loop Filter Resistance = 8 (5 bit(s)) (Setting 8)
-	5    :   1;
+	4    :   1; -- Loop Filter Resistance = 19 (5 bit(s)) (Setting 19)
+	5    :   0;
 	6    :   0;
-	7    :   0;
-	8    :   0;
+	7    :   1;
+	8    :   1;
 	9    :   0; -- VCO Post Scale = 0 (1 bit(s)) (VCO post-scale divider counter value = 2)
 	10   :   0; -- Reserved Bits = 0 (5 bit(s))
 	11   :   0;
@@ -54,33 +55,33 @@ CONTENT BEGIN
 	24   :   0;
 	25   :   1;
 	26   :   1;
-	27   :   1; -- N counter: Odd Division = 1 (1 bit(s))
-	28   :   0; -- N counter: Low Count = 2 (8 bit(s))
+	27   :   0; -- N counter: Odd Division = 0 (1 bit(s))
+	28   :   0; -- N counter: Low Count = 3 (8 bit(s))
 	29   :   0;
 	30   :   0;
 	31   :   0;
 	32   :   0;
 	33   :   0;
 	34   :   1;
-	35   :   0;
+	35   :   1;
 	36   :   0; -- M counter: Bypass = 0 (1 bit(s))
-	37   :   0; -- M counter: High Count = 49 (8 bit(s))
+	37   :   0; -- M counter: High Count = 28 (8 bit(s))
 	38   :   0;
-	39   :   1;
+	39   :   0;
 	40   :   1;
-	41   :   0;
-	42   :   0;
+	41   :   1;
+	42   :   1;
 	43   :   0;
-	44   :   1;
+	44   :   0;
 	45   :   1; -- M counter: Odd Division = 1 (1 bit(s))
-	46   :   0; -- M counter: Low Count = 48 (8 bit(s))
+	46   :   0; -- M counter: Low Count = 27 (8 bit(s))
 	47   :   0;
-	48   :   1;
+	48   :   0;
 	49   :   1;
-	50   :   0;
+	50   :   1;
 	51   :   0;
-	52   :   0;
-	53   :   0;
+	52   :   1;
+	53   :   1;
 	54   :   0; -- clk0 counter: Bypass = 0 (1 bit(s))
 	55   :   0; -- clk0 counter: High Count = 4 (8 bit(s))
 	56   :   0;
@@ -90,33 +91,33 @@ CONTENT BEGIN
 	60   :   1;
 	61   :   0;
 	62   :   0;
-	63   :   0; -- clk0 counter: Odd Division = 0 (1 bit(s))
-	64   :   0; -- clk0 counter: Low Count = 4 (8 bit(s))
+	63   :   1; -- clk0 counter: Odd Division = 1 (1 bit(s))
+	64   :   0; -- clk0 counter: Low Count = 3 (8 bit(s))
 	65   :   0;
 	66   :   0;
 	67   :   0;
 	68   :   0;
-	69   :   1;
-	70   :   0;
-	71   :   0;
+	69   :   0;
+	70   :   1;
+	71   :   1;
 	72   :   0; -- clk1 counter: Bypass = 0 (1 bit(s))
-	73   :   0; -- clk1 counter: High Count = 8 (8 bit(s))
+	73   :   0; -- clk1 counter: High Count = 7 (8 bit(s))
 	74   :   0;
 	75   :   0;
 	76   :   0;
-	77   :   1;
-	78   :   0;
-	79   :   0;
-	80   :   0;
+	77   :   0;
+	78   :   1;
+	79   :   1;
+	80   :   1;
 	81   :   0; -- clk1 counter: Odd Division = 0 (1 bit(s))
-	82   :   0; -- clk1 counter: Low Count = 8 (8 bit(s))
+	82   :   0; -- clk1 counter: Low Count = 7 (8 bit(s))
 	83   :   0;
 	84   :   0;
 	85   :   0;
-	86   :   1;
-	87   :   0;
-	88   :   0;
-	89   :   0;
+	86   :   0;
+	87   :   1;
+	88   :   1;
+	89   :   1;
 	90   :   1; -- clk2 counter: Bypass = 1 (1 bit(s))
 	91   :   0; -- clk2 counter: High Count = 0 (8 bit(s))
 	92   :   0;
