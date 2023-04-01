@@ -1,3 +1,4 @@
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) demistify_config_pkg.vhd]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/tap_fifo.vhd]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1530.vhd]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) rtl/progressbar.v]
@@ -35,7 +36,7 @@ set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/sid/mu
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/sid/adsr_multi.vhd]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1541/via6522.vhd]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1541/spram.vhd]
-set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1541/spi_controller.vhd]
+#set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1541/spi_controller.vhd]
 set_global_assignment -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) rtl/c1541/mist_sd_card.sv]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1541/gen_rom.vhd]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) rtl/c1541/gcr_floppy.vhd]
