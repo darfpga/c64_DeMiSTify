@@ -1,0 +1,92 @@
+Multi I/O Board 
+
+The board comes with no warranty. Use it at your own risk.
+
+It can be used with Terasic DE0-Nano board or DE2/DE10-lite board. Beware that DE10-Nano board
+have a specific GPIO numbering (see below).
+
+Carefully look at schematics to make sure it is OK with your board.
+
+**Be very careful** 
+5V, 3.3V and GND are available at 20pins I/O header. Do not connect any wire 
+while board is powered on. Shorting 5V or 3.3V with GND will destroy DE0-Nano/DE10 board.
+
+
+Test have been done with DE0-Nano and DE10-Lite boards.
+
+
+- RGB output : 3x4bits + H sync and V sync
+- Stereo Audio output
+- Micro SD slot (cs, clk, miso, mosi)
+- PS2 keyboard (clk, dat) on DIN OR USB plug
+- 2 inputs pins (IN_0, IN1)
+- 12 inputs/output pins (IO_0 to IO_11)
+
+Inputs are 5V tolerants due to 47Ohms resistors and Sottky diodes.
+Only one PS2 keyboard must be connected at the same time. Either on DIN plug OR USB plug.
+
+(Even USB plug is for **PS2 keyboard ONLY**)
+
+
+40 pins connector (to DE0 Nano GPIO_1)
+
+gpio_1_in(0)        I_0 |  1 -  2 | pwm_audio_out_l gpio_1(0)
+gpio_1_in(1)        I_1 |  3 -  4 | pwm_audio_out_r gpio_1(1)
+gpio_1(2)        vga_vs |  5 -  6 | vga_hs          gpio_1(3)
+gpio_1(4)       vga_r_0 |  7 -  8 | vga_r_1         gpio_1(5)
+gpio_1(6)       vga_r_2 |  9 - 10 | vga_r_3         gpio_1(7)
+                     5V | 11 - 12 | GND
+gpio_1(8)       vga_g_0 | 13 - 14 | vga_g_1         gpio_1(9)
+gpio_1(10)      vga_g_2 | 15 - 16 | vga_g_3         gpio_1(11)
+gpio_1(12)      vga_b_0 | 17 - 18 | vga_b_1         gpio_1(13)
+gpio_1(14)      vga_b_2 | 19 - 20 | vga_b_3         gpio_1(15)
+gpio_1(16)   sd_dat3/cs | 21 - 22 | sd_cmd/mosi     gpio_1(17)
+gpio_1(18)       sd_clk | 23 - 24 | sd_dat/miso     gpio_1(19)
+gpio_1(20)        I/O_0 | 25 - 26 | I/O_1           gpio_1(21)
+gpio_1(22)        I/O_2 | 27 - 28 | I/O_3           gpio_1(23)
+                   3.3V | 29 - 30 | GND
+gpio_1(24)        I/O_4 | 31 - 32 | I/O_5           gpio_1(25)
+gpio_1(26)        I/O_6 | 33 - 34 | I/O_7           gpio_1(27)
+gpio_1(28)        I/O_8 | 35 - 36 | I/O_9           gpio_1(29)
+gpio_1(30)       I/O_10 | 37 - 38 | I/O_11          gpio_1(31)
+gpio_1(32)      ps2_dat | 39 - 40 | ps2_clk         gpio_1(33)
+
+20 pins connector (Digital I/O)
+
+   5V  |  1 -  2 |GND
+   I_0 |  3 -  4 |I_1
+ I/O_0 |  5 -  6 |I/0_1
+ I/O_2 |  7 -  8 |I/0_3
+ I/O_4 |  9 - 10 |I/0_5
+ I/O_6 | 11 - 12 |I/0_7
+ I/O_8 | 13 - 14 |I/0_9
+I/O_10 | 15 - 16 |I/0_11
+  N.C. | 17 - 18 |N.C.
+  3.3v | 19 - 20 |GND
+
+----------
+PCB : 26€
+----------
+
+--------------------
+Components : 11.24€
+--------------------
+VGA 15 pins    : MULTICOMP SPC15430  : 1.72€
+JACK 3.5mm     : LUMBERG 1503 10     : 2.08€
+HE10 40pins    : MC9A12-4034         : 0.33€
+HE10 20pins    : MC9A12-2034         : 0.31€
+MINI DIN 6pins : LUMBERG TM 0508 A/6 : 1.60€
+USB A          : AMP292303-1         : 1.22€
+SCHOTTKY DIODE : BAT54S x 18         : 2.80€
+MICRO SD HEADER: DM3D-SF             : 1.18€
+resistors/capacitors                 : 0.00€
+
+--------
+Options:
+--------
+STAND NYLON    : ETTINGER 5.30.310     : 0.90€
+HE10 40wires bridge with 2 IDC socket  : 5.00€
+
+-------------------------------
+Soldering work around 5/6 hours
+-------------------------------
