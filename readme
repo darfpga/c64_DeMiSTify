@@ -1,0 +1,17 @@
+C64_DeMiSTify - C64_mist demistified
+
+DE10-lite board top level
+	with Alastair M. Robinson's hardware interface 
+	with DarFPGA's hardware interface 
+	
+DE0-nano board top level (FIT OK with only one 8580)
+	with DarFPGA's hardware interface 
+
+Early tests
+	Keyboard OK
+	Sound OK
+	TAP OK
+	D64 OK
+	CRT KO
+	G64 not tested
+	PRG not tested
