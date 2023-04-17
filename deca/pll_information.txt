@@ -1,0 +1,13 @@
+pll.vhd : 
+	in 50.000MHz 
+	c0 32.000MHz : multiply 16 / divide 25
+	
+pll_c64.vhd : 
+-- pal config
+	in 50.000MHz
+	c0 63.000MHZ : multiply 63 / divide 50   -> ram clock
+	c1 31.500MHz : multiply 63 / divide 100  -> c64 clock 31.500 / 32 = 0.984MHz
+-- ntsc config
+	in 50.000MHz
+	c0 65.476MHZ : multiply 55 / divide 42   -> ram clock
+	c1 32.738MHz : multiply 55 / divide 84   -> c64 clock 32.738 / 32 = 1.023MHz

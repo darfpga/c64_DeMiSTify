@@ -69,7 +69,7 @@ entity neptuno_top is
 		STM_TX_I  : in std_logic  := 'Z'; -- stm TX pin, so, is IN on the slave
 		STM_RST_O : out std_logic := 'Z' -- '0' to hold the microcontroller reset line, to free the SD card
 	);
-end entity;
+END entity;
 
 architecture RTL of neptuno_top is
 
@@ -84,7 +84,7 @@ architecture RTL of neptuno_top is
 	signal sd_miso : std_logic;
 
 	-- internal SPI signals
-	signal spi_do : std_logic;
+	signal spi_do 	     : std_logic;
 	signal spi_toguest   : std_logic;
 	signal spi_fromguest : std_logic;
 	signal spi_ss2       : std_logic;
@@ -127,8 +127,8 @@ architecture RTL of neptuno_top is
 
 	component audio_top is
 		port (
-			clk_50MHz : in std_logic;  -- system clock (50 MHz)
-			dac_MCLK  : out std_logic; -- outputs to PMODI2L DAC
+			clk_50MHz : in std_logic;  -- system clock
+			dac_MCLK  : out std_logic; -- outputs to I2S DAC
 			dac_LRCK  : out std_logic;
 			dac_SCLK  : out std_logic;
 			dac_SDIN  : out std_logic;
@@ -240,8 +240,8 @@ begin
 		--	R_data    => std_logic_vector(dac_r_s)
 		);
 
-	--dac_l_s <= ('0' & dac_l & "00000");
-	--dac_r_s <= ('0' & dac_r & "00000");
+	--dac_l_s <= ('0' & dac_l(14 downto 0));
+	--dac_r_s <= ('0' & dac_r(14 downto 0));
 
 
 	-- JOYSTICKS
@@ -281,9 +281,7 @@ begin
 			SDRAM_BA   => DRAM_BA,
 			SDRAM_CLK  => DRAM_CLK,
 			SDRAM_CKE  => DRAM_CKE,
-			--UART
-			UART_TX  => open,
-			UART_RX  => '0',
+
 			--SPI
 			SPI_DO     => spi_do,
 			SPI_DI     => spi_toguest,
@@ -302,7 +300,10 @@ begin
 		--		DAC_L   => dac_l,
 		--		DAC_R   => dac_r,
 			AUDIO_L => SIGMA_L,
-			AUDIO_R => SIGMA_R
+			AUDIO_R => SIGMA_R,
+
+			UART_RX => '0',
+			UART_TX => open
 		);
 
 
