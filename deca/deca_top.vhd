@@ -435,7 +435,7 @@ begin
 	-- HDMI_I2S(0) <= i2s_D_o;
 
 
-guest: entity work.c64_mist
+guest  : COMPONENT c64_mist
 PORT map
 (
 --		CLOCK_27 => MAX10_CLK1_50&MAX10_CLK1_50, -- Comment out one of these lines to match the guest core.

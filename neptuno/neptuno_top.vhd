@@ -266,7 +266,7 @@ begin
 	);
 
 
-	guest: entity work.c64_mist
+	guest: COMPONENT c64_mist
 		port map(
 			CLOCK_27 => CLOCK_50_I,
 			--SDRAM
