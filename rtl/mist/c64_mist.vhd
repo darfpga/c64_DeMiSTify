@@ -115,7 +115,6 @@ constant CONF_STR : string :=
 	"F,ROM,Load;"& --3
 	"TH,Play/Stop TAP;"&
 	"P1,Video & Audio;"&
-	"P2,System;"&
 	"P1O89,Scandoubler Fx,None,CRT 25%,CRT 50%,CRT 75%;"&
 	"P1O2,Video standard,PAL,NTSC;"&
 	"P1OI,Tape sound,Off,On;"&
@@ -123,6 +122,7 @@ constant CONF_STR : string :=
 	"P1ODF,SID,6581 Mono,6581 Stereo,8580 Mono,8580 Stereo,Pseudo Stereo;"&
 	"P1O6,Audio filter,On,Off;"&
 	"P1ONP,Midi,Off,Sequential Inc.,Passport/Sentech,DATEL/SIEL/JMS/C-LAB,Namesoft;"&
+	"P2,System;"&
 	"P2O3,Joysticks,Normal,Swapped;"&
 	"P2OG,Disk Write,Enable,Disable;"&
 	"P2OQR,Userport,4-player IF,UART,UP9600;"&
