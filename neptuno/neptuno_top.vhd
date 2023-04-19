@@ -193,8 +193,8 @@ architecture RTL of neptuno_top is
 
 	-- NeptUNO target guest_top template signals
 	alias clock_input 	: std_logic is CLOCK_50_I;
-	alias uart_txd 		: std_logic is PMOD4_D5;
-	alias uart_rxd 		: std_logic is PMOD4_D4;
+	--alias uart_txd 		: std_logic is PMOD4_D5;
+	--alias uart_rxd 		: std_logic is PMOD4_D4;
 	
 begin
 
