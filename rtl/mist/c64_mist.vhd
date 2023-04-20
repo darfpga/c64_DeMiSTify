@@ -112,7 +112,7 @@ constant CONF_STR : string :=
 	"C64;;"&
 	"S0U,D64G64,Mount Disk;"&
 	"F,CRTPRGTAPREU,Load;"& --2
-	"F,ROM,Load;"& --3
+	"F,ROM,Load ROM;"& --3
 	"TH,Play/Stop TAP;"&
 	"P1,Video & Audio;"&
 	"P1O89,Scandoubler Fx,None,CRT 25%,CRT 50%,CRT 75%;"&
