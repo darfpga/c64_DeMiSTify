@@ -1,5 +1,5 @@
 # files inherited from the guest core:
-project.qip
+files.qip
 
 # The controller module
 DeMiSTify/controller/controller.qip
@@ -11,7 +11,3 @@ demistify_config_pkg.vhd
 # Either:  firmware with customisations
 firmware/controller_rom1_byte.vhd
 firmware/controller_rom2_byte.vhd
-
-# or:  standard firmware
-DeMiSTify/controller/firmware_std.qip
-

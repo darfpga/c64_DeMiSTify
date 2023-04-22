@@ -112,10 +112,9 @@ constant CONF_STR : string :=
 	"C64;;"&
 	"S0U,D64G64,Mount Disk;"&
 	"F,CRTPRGTAPREU,Load;"& --2
-	"F,ROM,Load;"& --3
+	"F,ROM,Load ROM;"& --3
 	"TH,Play/Stop TAP;"&
 	"P1,Video & Audio;"&
-	"P2,System;"&
 	"P1O89,Scandoubler Fx,None,CRT 25%,CRT 50%,CRT 75%;"&
 	"P1O2,Video standard,PAL,NTSC;"&
 	"P1OI,Tape sound,Off,On;"&
@@ -123,6 +122,7 @@ constant CONF_STR : string :=
 	"P1ODF,SID,6581 Mono,6581 Stereo,8580 Mono,8580 Stereo,Pseudo Stereo;"&
 	"P1O6,Audio filter,On,Off;"&
 	"P1ONP,Midi,Off,Sequential Inc.,Passport/Sentech,DATEL/SIEL/JMS/C-LAB,Namesoft;"&
+	"P2,System;"&
 	"P2O3,Joysticks,Normal,Swapped;"&
 	"P2OG,Disk Write,Enable,Disable;"&
 	"P2OQR,Userport,4-player IF,UART,UP9600;"&
@@ -1158,6 +1158,20 @@ begin
 
 	SDRAM_CKE <= '1';
 
+	sdramblock : block
+        signal initram : std_logic := '0';
+        signal pllsync : std_logic_vector(1 downto 0) := "00";
+    begin
+
+    -- Sync PLL 2's locked signal to the ram clock domain.
+    process(clk_ram) begin
+        if rising_edge(clk_ram) then
+            if pll_locked='1' then
+                pllsync<=pllsync(0)&pll_locked;
+            end if;
+        end if;
+    end process;
+
 	sdr: sdram port map(
 		sd_addr => SDRAM_A,
 		sd_data => SDRAM_DQ,
@@ -1174,11 +1188,13 @@ begin
 		din => sdram_data_in,
 		dout => sdram_data_out,
 		bs => sdram_bs,
-		init => not pll_locked,
+		init => not pllsync(1), 	-- not pll_locked,
 		we => sdram_we,
 		refresh => idle,
 		ce => sdram_ce
 	);
+
+	end block;
 
 	audio_data_l_mix <= audio_data_l when st_tape_sound = '0' else
 	                    audio_data_l + ((not (not cass_read or cass_write)) & "00000000000000");

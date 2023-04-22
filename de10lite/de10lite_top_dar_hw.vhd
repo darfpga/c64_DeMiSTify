@@ -207,7 +207,7 @@ VGA_VS<=vga_vsync;
 
 -- Generate clocks
 
-guest: entity work.c64_mist
+guest: COMPONENT c64_mist
 	PORT map
 	(
 --		CLOCK_27 => MAX10_CLK1_50&MAX10_CLK1_50, -- Comment out one of these lines to match the guest core.

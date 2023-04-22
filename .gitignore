@@ -6,3 +6,4 @@ firmware/controller.map
 *.pof
 *.sof
 *.qws
+output_files
