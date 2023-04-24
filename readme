@@ -12,6 +12,6 @@ Early tests
 	Sound OK
 	TAP OK
 	D64 OK
-	CRT KO
+	CRT OK
 	G64 not tested
-	PRG not tested
+	PRG OK
