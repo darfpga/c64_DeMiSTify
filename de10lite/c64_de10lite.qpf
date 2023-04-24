@@ -8,22 +8,23 @@
 # associated documentation or information are expressly subject 
 # to the terms and conditions of the Intel Program License 
 # Subscription Agreement, the Intel Quartus Prime License Agreement,
-# the Intel FPGA IP License Agreement, or other applicable license
-# agreement, including, without limitation, that your use is for
-# the sole purpose of programming logic devices manufactured by
-# Intel and sold by Intel or its authorized distributors.  Please
-# refer to the applicable agreement for further details.
+# the Intel MegaCore Function License Agreement, or other 
+# applicable license agreement, including, without limitation, 
+# that your use is for the sole purpose of programming logic 
+# devices manufactured by Intel and sold by Intel or its 
+# authorized distributors.  Please refer to the applicable 
+# agreement for further details.
 #
 # -------------------------------------------------------------------------- #
 #
 # Quartus Prime
-# Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-# Date created = 21:26:39  April 18, 2023
+# Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+# Date created = 14:43:57  April 24, 2023
 #
 # -------------------------------------------------------------------------- #
 
-QUARTUS_VERSION = "17.1"
-DATE = "21:26:39  April 18, 2023"
+QUARTUS_VERSION = "17.0"
+DATE = "14:43:57  April 24, 2023"
 
 # Revisions
 
