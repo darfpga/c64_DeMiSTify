@@ -72,7 +72,7 @@ here, the number of units defaults to 4. */
 
 /* If this is defined, DeMiSTify will look for a file called "15KHZ.CFG", and if found,
 disable the scandoubler. */
-#undef CONFIG_AUTOSCANDOUBLER
+#define CONFIG_AUTOSCANDOUBLER
 
 #endif
 

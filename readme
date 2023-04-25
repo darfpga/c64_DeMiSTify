@@ -15,3 +15,5 @@ Early tests
 	CRT OK
 	G64 not tested
 	PRG OK
+	15KHZ Video OK (add a file named '15KHZ.CFG' at SD root)
+	
