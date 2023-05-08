@@ -151,7 +151,7 @@ architecture rtl of fpga64_keyboard_matrix is
 	signal joyKeys : std_logic_vector(joyA'range) := (others => '0');	-- active high
 	signal joyA_s : unsigned(joyA'range);						-- active low
 	signal joyB_s : unsigned(joyB'range);						-- active low
-	signal joySel : std_logic_vector(1 downto 0) := "00";
+	signal joySel : std_logic := '0';
 	
 	-- for disk image selection
 	signal diskChgKey : std_logic;
@@ -174,35 +174,25 @@ begin
 
 	disk_num <= disk_nb;
 	--
-	-- cycle though joystick emulation options on <F11>	
+	-- cycle through joystick emulation options on <CTRL F1>	
 	--
-	-- "00" - PORTA = JOYA or JOYKEYS, PORTB = JOYB
-	-- "01" - PORTA = JOYA, PORTB = JOYB or JOYKEYS
-	-- "10" - PORTA = JOYA, PORTB = JOYKEYS
-	-- "11" - PORTA = JOYKEYS, PORTB = JOYA
+	-- '0' - PORTA = JOYA or JOYKEYS, PORTB = JOYB
+	-- '1' - PORTA = JOYA,            PORTB = JOYB or JOYKEYS
 	
-	process (clk) --, reset)
+	process (clk)
 	begin
 		if rising_edge(clk) then
 			if joySelKey = '1' then
-				joySel <= joySel + 1;
+				joySel <= not joySel;
 			end if;
 		end if;
 	end process;
 
-	joyA_s <= joyA and not unsigned(joyKeys) when joySel = "00" else
-						not unsigned(joyKeys) when joySel = "11" else
-						joyA;
-	joyB_s <= joyB when joySel = "00" else
-						joyB and not unsigned(joyKeys) when joySel = "01" else
-						not unsigned(joyKeys) when joySel = "10" else
-						joyA;
+	joyA_s <= joyA and not unsigned(joyKeys) when joySel = '0' else joyA;
+	joyB_s <= joyB and not unsigned(joyKeys) when joySel = '1' else joyB ;
 
 	matrix: process(clk)
 	begin
-		--if reset = '1' then
-		--	joySelKey <= '0';
-		--	joyKeys <= (others => '0');
 		if rising_edge(clk) then
 			-- reading A, scan pattern on B
 			pao(0) <= pai(0) and joyA_s(0) and
@@ -375,88 +365,93 @@ begin
 					releaseFlag <= '0';		
 					extendedFlag <= '0';
 					case theScanCode is
-					when X"05" => key_F1 <= not releaseFlag;
-					when X"06" => key_F2 <= not releaseFlag;
-					when X"04" => key_F3 <= not releaseFlag;
-					when X"0C" => key_F4 <= not releaseFlag;
-					when X"03" => key_F5 <= not releaseFlag;
-					when X"0B" => key_F6 <= not releaseFlag;
-					when X"83" => key_F7 <= not releaseFlag;
-					when X"0A" => key_F8 <= not releaseFlag;
+					when X"05" =>                               -- F1
+						if key_ctrl = '1' then
+							joySelKey <= not releaseFlag;
+						else
+							key_F1 <= not releaseFlag;
+						end if;
+					when X"06" => key_F2 <= not releaseFlag;    -- F2
+					when X"04" => key_F3 <= not releaseFlag;    -- F3
+					when X"0C" => key_F4 <= not releaseFlag;    -- F4
+					when X"03" => key_F5 <= not releaseFlag;    -- F5
+					when X"0B" => key_F6 <= not releaseFlag;    -- F6
+					when X"83" => key_F7 <= not releaseFlag;    -- F7
+					when X"0A" => key_F8 <= not releaseFlag;    -- F8
 					when X"01" => key_pound <= not releaseFlag; -- F9
-					when X"09" => key_plus <= not releaseFlag; -- F10
-					when X"78" => -- F11
+					when X"09" => key_plus <= not releaseFlag;  -- F10
+					when X"78" =>                               -- F11
 						if key_ctrl = '1' then
 							reset_key <= not releaseFlag;
 						else
 							restore_key <= not releaseFlag;
 						end if;
-					when X"0E" => key_arrowleft <= not releaseFlag;
-					when X"11" => key_commodore <= not releaseFlag; 
-					when X"12" => if extendedFlag = '0' then key_shiftl <= not releaseFlag; end if;
-					when X"14" => key_ctrl <= not releaseFlag; 
-					when X"15" => key_Q <= not releaseFlag; 
-					when X"16" => key_1 <= not releaseFlag; 
-					when X"1A" => key_Z <= not releaseFlag; 
-					when X"1B" => key_S <= not releaseFlag; 
-					when X"1C" => key_A <= not releaseFlag; 
-					when X"1D" => key_W <= not releaseFlag; 
-					when X"1E" => key_2 <= not releaseFlag; 
-					when X"21" => key_C <= not releaseFlag; 
-					when X"22" => key_X <= not releaseFlag; 
-					when X"23" => key_D <= not releaseFlag;
-					when X"24" => key_E <= not releaseFlag; 
-					when X"25" => key_4 <= not releaseFlag; 
-					when X"26" => key_3 <= not releaseFlag; 
-					when X"29" => key_space <= not releaseFlag; 
-					when X"2A" => key_V <= not releaseFlag; 
-					when X"2B" => key_F <= not releaseFlag; 
-					when X"2C" => key_T <= not releaseFlag; 
-					when X"2D" => key_R <= not releaseFlag; 
-					when X"2E" => key_5 <= not releaseFlag; 
-					when X"31" => key_N <= not releaseFlag; 
-					when X"32" => key_B <= not releaseFlag; 
-					when X"33" => key_H <= not releaseFlag; 
-					when X"34" => key_G <= not releaseFlag; 
-					when X"35" => key_Y <= not releaseFlag; 
-					when X"36" => key_6 <= not releaseFlag; 
-					when X"3A" => key_M <= not releaseFlag; 
-					when X"3B" => key_J <= not releaseFlag; 
-					when X"3C" => key_U <= not releaseFlag; 
-					when X"3D" => key_7 <= not releaseFlag; 
-					when X"3E" => key_8 <= not releaseFlag;
-					when X"41" => key_comma <= not releaseFlag; 
-					when X"42" => key_K <= not releaseFlag;
-					when X"43" => key_I <= not releaseFlag; 
-					when X"44" => key_O <= not releaseFlag; 
-					when X"45" => key_0 <= not releaseFlag; 
-					when X"46" => key_9 <= not releaseFlag; 
-					when X"49" => key_dot <= not releaseFlag; 
-					when X"4A" => key_slash <= not releaseFlag; 
-					when X"4B" => key_L <= not releaseFlag; 
-					when X"4C" => key_colon <= not releaseFlag; 
-					when X"4D" => key_P <= not releaseFlag; 
-					when X"4E" => key_minus <= not releaseFlag;
-					when X"52" => key_semicolon <= not releaseFlag; 
-					when X"54" => key_at <= not releaseFlag; 
-					when X"55" => key_equal <= not releaseFlag;
-					when X"59" => if extendedFlag = '0' then key_shiftr <= not releaseFlag; end if;
-					when X"5A" => key_Return <= not releaseFlag; 
-					when X"5B" => key_star <= not releaseFlag; 
-					when X"5D" => key_arrowup <= not releaseFlag;
-					when X"6B" => if extendedFlag = '0' then joyKeys(2) <= not releaseFlag; else key_left <= not releaseFlag; end if;
-					when X"6C" => key_home <= not releaseFlag; 
-					when X"66" => key_del <= not releaseFlag; 
-					when X"70" => if extendedFlag = '0' then joyKeys(4) <= not releaseFlag; end if;
-					when X"71" => if extendedFlag = '0' then key_dot <= not releaseFlag; end if;
-					when X"72" => if extendedFlag = '0' then joyKeys(1) <= not releaseFlag; else key_down <= not releaseFlag; end if;
-					when X"74" => if extendedFlag = '0' then joyKeys(3) <= not releaseFlag; else key_right <= not releaseFlag; end if;
-					when X"75" => if extendedFlag = '0' then joyKeys(0) <= not releaseFlag; else key_up <= not releaseFlag; end if;
-					when X"76" => key_runstop <= not releaseFlag;
-					when X"79" => if extendedFlag = '0' then key_plus <= not releaseFlag; end if;
-					when X"7B" => if extendedFlag = '0' then key_minus <= not releaseFlag; end if;
-					when X"7C" => if extendedFlag = '0' then key_star <= not releaseFlag; end if;
-					when X"7D" => if extendedFlag = '1' then tapPlayStopKey <= not releaseFlag; end if; -- pg up
+					when X"0E" => key_arrowleft <= not releaseFlag;  -- TICK
+					when X"11" => key_commodore <= not releaseFlag;  -- ALT
+					when X"12" => if extendedFlag = '0' then key_shiftl <= not releaseFlag; end if; -- LSHIFT
+					when X"14" => key_ctrl <= not releaseFlag;   -- LCTRL
+					when X"15" => key_Q <= not releaseFlag;      -- Q
+					when X"16" => key_1 <= not releaseFlag;      -- 1
+					when X"1A" => key_Z <= not releaseFlag;      -- Z
+					when X"1B" => key_S <= not releaseFlag;      -- S
+					when X"1C" => key_A <= not releaseFlag;      -- A
+					when X"1D" => key_W <= not releaseFlag;      -- W
+					when X"1E" => key_2 <= not releaseFlag;      -- 2 
+					when X"21" => key_C <= not releaseFlag;      -- C
+					when X"22" => key_X <= not releaseFlag;      -- X 
+					when X"23" => key_D <= not releaseFlag;      -- D
+					when X"24" => key_E <= not releaseFlag;      -- E
+					when X"25" => key_4 <= not releaseFlag;      -- 4
+					when X"26" => key_3 <= not releaseFlag;      -- 3
+					when X"29" => key_space <= not releaseFlag;  -- SPACE
+					when X"2A" => key_V <= not releaseFlag;      -- V
+					when X"2B" => key_F <= not releaseFlag;      -- F
+					when X"2C" => key_T <= not releaseFlag;      -- T
+					when X"2D" => key_R <= not releaseFlag;      -- R 
+					when X"2E" => key_5 <= not releaseFlag;      -- 5
+					when X"31" => key_N <= not releaseFlag;      -- N
+					when X"32" => key_B <= not releaseFlag;      -- B
+					when X"33" => key_H <= not releaseFlag;      -- H
+					when X"34" => key_G <= not releaseFlag;      -- G
+					when X"35" => key_Y <= not releaseFlag;      -- Y
+					when X"36" => key_6 <= not releaseFlag;      -- 6
+					when X"3A" => key_M <= not releaseFlag;      -- M
+					when X"3B" => key_J <= not releaseFlag;      -- J
+					when X"3C" => key_U <= not releaseFlag;      -- U
+					when X"3D" => key_7 <= not releaseFlag;      -- 7
+					when X"3E" => key_8 <= not releaseFlag;      -- 8
+					when X"41" => key_comma <= not releaseFlag;  -- COMMA 
+					when X"42" => key_K <= not releaseFlag;      -- K
+					when X"43" => key_I <= not releaseFlag;      -- I
+					when X"44" => key_O <= not releaseFlag;      -- O
+					when X"45" => key_0 <= not releaseFlag;      -- 0
+					when X"46" => key_9 <= not releaseFlag;      -- 9
+					when X"49" => key_dot <= not releaseFlag;    -- PERIOD
+					when X"4A" => key_slash <= not releaseFlag;  -- SLASH
+					when X"4B" => key_L <= not releaseFlag;      -- L
+					when X"4C" => key_colon <= not releaseFlag;  -- SEMICOLON
+					when X"4D" => key_P <= not releaseFlag;      -- P
+					when X"4E" => key_minus <= not releaseFlag;      -- MINUS
+					when X"52" => key_semicolon <= not releaseFlag;  -- APOSTROPHE
+					when X"54" => key_at <= not releaseFlag;         -- LEFTBRACE
+					when X"55" => key_equal <= not releaseFlag;      -- EQUAL
+					when X"59" => if extendedFlag = '0' then key_shiftr <= not releaseFlag; end if; -- RSHIFT
+					when X"5A" => key_Return <= not releaseFlag;     -- ENTER
+					when X"5B" => key_star <= not releaseFlag;       -- RIGHTBRACE
+					when X"5D" => key_arrowup <= not releaseFlag;    -- HASH
+					when X"6B" => if extendedFlag = '0' then joyKeys(2) <= not releaseFlag; else key_left <= not releaseFlag; end if;  -- PAD_4
+					when X"6C" => key_home <= not releaseFlag;       -- PAD 7
+					when X"66" => key_del <= not releaseFlag;        -- BACKSPACE
+					when X"70" => if extendedFlag = '0' then joyKeys(4) <= not releaseFlag; end if; -- PAD 0
+					when X"71" => if extendedFlag = '0' then key_dot <= not releaseFlag; end if;    -- PAD PERIOD
+					when X"72" => if extendedFlag = '0' then joyKeys(1) <= not releaseFlag; else key_down <= not releaseFlag; end if;  -- PAD 2
+					when X"74" => if extendedFlag = '0' then joyKeys(3) <= not releaseFlag; else key_right <= not releaseFlag; end if; -- PAD 6
+					when X"75" => if extendedFlag = '0' then joyKeys(0) <= not releaseFlag; else key_up <= not releaseFlag; end if;    -- PAD 8
+					when X"76" => key_runstop <= not releaseFlag;    -- ESC
+					when X"79" => if extendedFlag = '0' then key_plus <= not releaseFlag; end if;  -- PAD PLUS
+					when X"7B" => if extendedFlag = '0' then key_minus <= not releaseFlag; end if; -- PAD MINUS
+					when X"7C" => if extendedFlag = '0' then key_star <= not releaseFlag; end if;  -- PAD ASTERISK
+					when X"7D" => if extendedFlag = '1' then tapPlayStopKey <= not releaseFlag; end if; -- PAD 9
 					when others => null;
 					end case;
 				end if;
