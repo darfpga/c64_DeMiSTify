@@ -17,3 +17,4 @@ Early tests
 	PRG OK
 	15KHZ Video OK (add a file named '15KHZ.CFG' at SD root)
 	
+	Swap keyboard cursor keys between JOY1/JOY2 with ctrl-F1
